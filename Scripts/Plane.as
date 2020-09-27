@@ -32,9 +32,9 @@ class Plane
 		return DotProduct(normal, point) + distance_to_origin;
 	}
 	
-	void SetAndNormalize(const Vec3f&in _normal, float _distance_to_origin)
+	void SetAndNormalize(Vec3f&in _normal, float _distance_to_origin)
 	{
-		float length = _normal.Length();
+		float length = _normal.length();
 
 		normal = normal / length;
 		distance_to_origin = _distance_to_origin / length;
@@ -42,18 +42,18 @@ class Plane
 
 	void Normalize()
 	{
-		float length = normal.Length();
+		float length = normal.length();
 
 		normal /= length;
 		distance_to_origin /= length;
 	}
 
 	// stolen from irrlicht
-	bool getIntersectionWithPlane(const Plane&in other, Vec3f&out LinePoint, Vec3f&out LineVect)
+	bool getIntersectionWithPlane(Plane&in other, Vec3f&out LinePoint, Vec3f&out LineVect)
 	{
-		float fn00 = normal.Length();
+		float fn00 = normal.length();
 		float fn01 = DotProduct(normal, other.normal);
-		float fn11 = other.normal.Length();
+		float fn11 = other.normal.length();
 		float det = fn00*fn11 - fn01*fn01;
 
 		if (Maths::Abs(det) < 0.0000001f)
@@ -78,7 +78,7 @@ class Plane
 		return false;
 	}
 
-	bool getIntersectionWithLine(const Vec3f&in linePoint, const Vec3f&in lineVect, Vec3f&out Intersection) const
+	bool getIntersectionWithLine(Vec3f&in linePoint, Vec3f&in lineVect, Vec3f&out Intersection) const
 	{
 		float t2 = DotProduct(normal, lineVect);
 
