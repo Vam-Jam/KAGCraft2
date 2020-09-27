@@ -105,7 +105,7 @@ namespace Loading
 				Fill[0].col = Fill[1].col = Fill[2].col = Fill[3].col = color_black;
 
 				intro_timer = 0;
-				/*into_model_head.LoadObjIntoMesh("Models/Misc/Intro/intro_head.obj");
+				/* // \\ into_model_head.LoadObjIntoMesh("Models/Misc/Intro/intro_head.obj");
 				into_model_head.GetMaterial(0).SetFlag(SMaterial::LIGHTING, false);
 				into_model_head.GetMaterial(0).SetFlag(SMaterial::BACK_FACE_CULLING, false);
 				into_model_head.GetMaterial(0).SetFlag(SMaterial::BILINEAR_FILTER, false);
@@ -116,7 +116,7 @@ namespace Loading
 				into_model_body.GetMaterial(0).SetFlag(SMaterial::BACK_FACE_CULLING, false);
 				into_model_body.GetMaterial(0).SetFlag(SMaterial::BILINEAR_FILTER, false);
 				into_model_body.GetMaterial(0).SetFlag(SMaterial::BLEND_OPERATION, true);
-				into_model_body.GetMaterial(0).SetFlag(SMaterial::FOG_ENABLE, true);*/
+				into_model_body.GetMaterial(0).SetFlag(SMaterial::FOG_ENABLE, true); // \\ */
 
 				Render::addScript(Render::layer_background, "Client.as", "Render", 1);
 				

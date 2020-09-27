@@ -78,13 +78,13 @@ void MakeNickName(string player_name, SMesh@ mesh)
 	material.SetFlag(SMaterial::BLEND_OPERATION, true);
 	material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
 
-	/*mesh.Clear();
+	/* // \\ mesh.Clear();
 	mesh.SetMaterial(material);
 	mesh.SetVertex(Verts);
 	mesh.SetIndices(IDs);
 	mesh.SetDirty(SMesh::VERTEX_INDEX);
 	mesh.SetHardwareMapping(SMesh::STATIC);
-	mesh.BuildMesh();*/
+	mesh.BuildMesh(); // \\ */
 }
 
 int figureOutTextureLength(string player_name)

@@ -341,7 +341,7 @@ void Render(int id)
 				Matrix::MakeIdentity(model);
 				Render::SetTransform(model, camera.view, camera.projection);
 				
-				Loading::into_model_body.RenderMeshWithMaterial();
+				// \\Loading::into_model_body.RenderMeshWithMaterial();
 
 				float look_at_me = 0;
 				if(Loading::intro_timer >= 100 && Loading::intro_timer <= 250)
@@ -362,7 +362,7 @@ void Render(int id)
 				Matrix::SetRotationDegrees(temp_mat, 0, -look_at_me, 0);
 				model = Matrix_Multiply(model, temp_mat);
 				Render::SetModelTransform(model);
-				Loading::into_model_head.RenderMeshWithMaterial();
+				// \\Loading::into_model_head.RenderMeshWithMaterial();
 				Matrix::MakeIdentity(model);
 				Render::SetModelTransform(model);
 
@@ -433,7 +433,7 @@ void Render(int id)
 	Render::SetTransform(model, camera.view, camera.projection);
 
 	// render map
-	world.map_material.SetVideoMaterial();
+	// \\world.map_material.SetVideoMaterial();
 	for(int i = 0; i < chunks_to_render.size(); i++)
 	{
 		chunks_to_render[i].Render();
@@ -715,7 +715,7 @@ void CreateBlockParticles(uint8 block_id, Vec3f pos)
 {
 	if(v_fastrender) return;
 
-	if((pos-my_player.pos).Length() > 24) return;
+	if((pos-my_player.pos).length() > 24) return;
 
 	if(ps.particles.size() >= particle_cap) return;
 
