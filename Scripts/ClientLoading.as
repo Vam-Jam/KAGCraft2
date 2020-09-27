@@ -105,18 +105,18 @@ namespace Loading
 				Fill[0].col = Fill[1].col = Fill[2].col = Fill[3].col = color_black;
 
 				intro_timer = 0;
-				into_model_head.LoadObjIntoMesh("Models/Misc/Intro/intro_head.obj");
-				into_model_head.GetMaterial().SetFlag(SMaterial::LIGHTING, false);
-				into_model_head.GetMaterial().SetFlag(SMaterial::BACK_FACE_CULLING, false);
-				into_model_head.GetMaterial().SetFlag(SMaterial::BILINEAR_FILTER, false);
-				into_model_head.GetMaterial().SetFlag(SMaterial::BLEND_OPERATION, true);
-				into_model_head.GetMaterial().SetFlag(SMaterial::FOG_ENABLE, true);
+				/*into_model_head.LoadObjIntoMesh("Models/Misc/Intro/intro_head.obj");
+				into_model_head.GetMaterial(0).SetFlag(SMaterial::LIGHTING, false);
+				into_model_head.GetMaterial(0).SetFlag(SMaterial::BACK_FACE_CULLING, false);
+				into_model_head.GetMaterial(0).SetFlag(SMaterial::BILINEAR_FILTER, false);
+				into_model_head.GetMaterial(0).SetFlag(SMaterial::BLEND_OPERATION, true);
+				into_model_head.GetMaterial(0).SetFlag(SMaterial::FOG_ENABLE, true);
 				into_model_body.LoadObjIntoMesh("Models/Misc/Intro/intro_body.obj");
-				into_model_body.GetMaterial().SetFlag(SMaterial::LIGHTING, false);
-				into_model_body.GetMaterial().SetFlag(SMaterial::BACK_FACE_CULLING, false);
-				into_model_body.GetMaterial().SetFlag(SMaterial::BILINEAR_FILTER, false);
-				into_model_body.GetMaterial().SetFlag(SMaterial::BLEND_OPERATION, true);
-				into_model_body.GetMaterial().SetFlag(SMaterial::FOG_ENABLE, true);
+				into_model_body.GetMaterial(0).SetFlag(SMaterial::LIGHTING, false);
+				into_model_body.GetMaterial(0).SetFlag(SMaterial::BACK_FACE_CULLING, false);
+				into_model_body.GetMaterial(0).SetFlag(SMaterial::BILINEAR_FILTER, false);
+				into_model_body.GetMaterial(0).SetFlag(SMaterial::BLEND_OPERATION, true);
+				into_model_body.GetMaterial(0).SetFlag(SMaterial::FOG_ENABLE, true);*/
 
 				Render::addScript(Render::layer_background, "Client.as", "Render", 1);
 				
@@ -145,11 +145,11 @@ namespace Loading
 					{
 						fog_modif = Maths::Max(0, 7.5f-7.5f*((intro_timer-360)/120.0f));
 					}
-					if(intro_timer % 2 == 0) Render::SetFog(0x0000000, SMesh::LINEAR, fog_modif*(0.20f+float(XORRandom(20))/100.0f), fog_modif, 0, true, true);
+					if(intro_timer % 2 == 0) Render::SetFog(0x0000000, Driver::LINEAR, fog_modif*(0.20f+float(XORRandom(20))/100.0f), fog_modif, 0, true, true);
 				}
 				else if(intro_timer >= 420)
 				{
-					Render::SetFog(0xFFFFFFFF, SMesh::LINEAR, 0, 8000, 0, false, true);
+					Render::SetFog(0xFFFFFFFF, Driver::LINEAR, 0, 8000, 0, false, true);
 				}
 				intro_timer++;
 				if(getControls().isKeyJustPressed(KEY_SPACE) || intro_timer == 790)
@@ -285,7 +285,7 @@ namespace Loading
 
 				getControls().setMousePosition(Vec2f(float(getScreenWidth()) / 2.0f, float(getScreenHeight()) / 2.0f));
 
-				Render::SetFog(world.sky_color, SMesh::LINEAR, camera.z_far*0.76f, camera.z_far, 0, false, true);
+				Render::SetFog(world.sky_color, Driver::LINEAR, camera.z_far*0.76f, camera.z_far, 0, false, true);
 				Fill[0].col = Fill[1].col = Fill[2].col = Fill[3].col = world.sky_color;
 
 				for(int i = 0; i < block_queue.size(); i++)
