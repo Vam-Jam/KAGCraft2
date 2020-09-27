@@ -304,7 +304,7 @@ void onCommand(CRules@ this, uint8 cmd, CBitStream@ params)
 		world.sky_color.setGreen(g);
 		world.sky_color.setBlue(b);
 
-		Render::SetFog(world.sky_color, SMesh::LINEAR, camera.z_far*0.76f, camera.z_far, 0, false, false);
+		Render::SetFog(world.sky_color, Driver::LINEAR, camera.z_far*0.76f, camera.z_far, 0, false, false);
 		Fill[0].col = Fill[1].col = Fill[2].col = Fill[3].col = world.sky_color;
 	}
 	else if(cmd == this.getCommandID("S_UText"))
@@ -440,7 +440,7 @@ void Render(int id)
 	}
 	Render::SetBackfaceCull(false);
 	Vec3f look(1,1,0);
-	look.RotateXZ(-camera.interpolated_dir_x);
+	look.rotateXZ(-camera.interpolated_dir_x);
 	ps.Render(look);
 	Render::SetBackfaceCull(true);
 
@@ -496,7 +496,7 @@ void Render(int id)
 		// actual camera model (thanks jenny :3 )
 		Matrix::SetRotationDegrees(model, -camera.frustum_dir_y, camera.frustum_dir_x, 0);
 		Render::SetModelTransform(model);
-		camera.camera_model.RenderMeshWithMaterial();
+		// \\camera.camera_model.RenderMeshWithMaterial();
 	}
 
 	// calculate interpolation multiplier	

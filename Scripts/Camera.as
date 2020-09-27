@@ -92,7 +92,7 @@ class Camera
 		interpolated_dir_x = Maths::Lerp(dir_x, next_dir_x, getInterFrameTime());
 		interpolated_dir_y = Maths::Lerp(dir_y, next_dir_y, getInterFrameTime());
 		interpolated_dir_z = Maths::Lerp(dir_z, next_dir_z, getInterFrameTime());
-		interpolated_pos = pos.Lerp(next_pos, getInterFrameTime());
+		interpolated_pos = pos.lerp(next_pos, getInterFrameTime());
 		
 		//Matrix::MakePerspective(projection, fov, float(getDriver().getScreenWidth()) / float(getDriver().getScreenHeight()), z_near, z_far);
 		makeMatrix();

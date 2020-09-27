@@ -85,7 +85,7 @@ class Player
 
 	void MakeModel()
 	{
-		if(	player.getUsername() == "Turtlecake" ||
+		/* // \\ if(	player.getUsername() == "Turtlecake" ||
 			player.getUsername() == "MintMango" ||
 			player.getUsername() == "Mazey" ||
 			player.getUsername() == "epsilon" ||
@@ -168,7 +168,7 @@ class Player
 		mesh_leg_left.SetIndices(player_IDs);
 		mesh_leg_left.SetDirty(SMesh::VERTEX_INDEX);
 		mesh_leg_left.SetHardwareMapping(SMesh::STATIC);
-		mesh_leg_left.BuildMesh();
+		mesh_leg_left.BuildMesh(); // \\ */ 
 	}
 
 	void MakeNickname()
@@ -443,8 +443,8 @@ class Player
 					{
 						moving_vec.x += 1;
 					}
-					moving_vec.RotateXZ(-dir_x);
-					moving_vec.Normalize();
+					moving_vec.rotateXZ(-dir_x);
+					moving_vec.normalize();
 					if(fly)
 					{
 						if(c.isKeyPressed(KEY_SPACE))
@@ -608,7 +608,7 @@ class Player
 					AABB box(pl_to_test.pos-Vec3f(player_radius, 0, player_radius), pl_to_test.pos+Vec3f(player_radius, player_height, player_radius));
 					if(box.intersectsWithLine(camera.pos, look_dir, 50000))
 					{
-						distances.push_back((pl_to_test.pos - pos).Length());
+						distances.push_back((pl_to_test.pos - pos).length());
 					}
 					else
 					{
@@ -751,21 +751,21 @@ class Player
 
 	void RenderUpdate()
 	{
-		render_pos = old_pos.Lerp(pos, getInterFrameTime());
+		render_pos = old_pos.lerp(pos, getInterFrameTime());
 	}
 
 	void RenderPlayer()
 	{
 		if(Frozen)
 		{
-			player_frozen_material.SetVideoMaterial();
+			// \\ player_frozen_material.SetVideoMaterial();
 		}
 		else
 		{
-			player_material.SetVideoMaterial();
+			// \\ player_material.SetVideoMaterial();
 		}
 		
-		float[] model_matr;
+		/* // \\ float[] model_matr;
 		Matrix::MakeIdentity(model_matr);
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, 0, dir_x, 0);
@@ -793,7 +793,7 @@ class Player
 		mesh_leg_left.RenderMesh();
 		Matrix::SetRotationDegrees(model_matr, -limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_leg_right.RenderMesh();
+		mesh_leg_right.RenderMesh(); // \\ */
 	}
 
 	void RenderNickname()
@@ -805,7 +805,7 @@ class Player
 		Render::SetModelTransform(billboard_model);
 		Render::SetAlphaBlend(true);
 		Render::SetZBuffer(false, true);
-		mesh_nickname.RenderMeshWithMaterial();
+		// \\mesh_nickname.RenderMeshWithMaterial();
 		Render::SetAlphaBlend(false);
 		Render::SetZBuffer(true, true);
 	}

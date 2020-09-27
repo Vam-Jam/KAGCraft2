@@ -117,7 +117,7 @@ class Particle
     {
         look /= 2;
         look *= scale;
-        Vec3f render_pos = old_pos.Lerp(pos, getInterFrameTime());
+        Vec3f render_pos = old_pos.lerp(pos, getInterFrameTime());
         verts.push_back(Vertex(render_pos.x-look.x, render_pos.y, render_pos.z-look.z, u, _v, color_white));
         verts.push_back(Vertex(render_pos.x-look.x, render_pos.y+scale, render_pos.z-look.z, u, v, color_white));
         verts.push_back(Vertex(render_pos.x+look.x, render_pos.y+scale, render_pos.z+look.z, _u, v, color_white));
