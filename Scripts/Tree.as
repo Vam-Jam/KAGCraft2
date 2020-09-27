@@ -9,7 +9,7 @@ Chunk@[] chunks_to_render;
 
 class Root
 {
-    AABB box;
+    AABBox3d box;
 
     Branch@ BRxz;
     Branch@ BRx1z;
@@ -87,7 +87,7 @@ class Branch
 {
     bool leaf = false;
 
-    AABB box;
+    AABBox3d box;
 
     Branch@ BRxyz;
     Branch@ BRx1yz;
@@ -151,14 +151,14 @@ class Branch
 
     void Check()
     {
-        if(camera.frustum.ContainsSphere( box.center-camera.frustum_pos, box.corner))//(camera.frustum.ContainsAABB(box - camera.frustum_pos))
+        if(camera.frustum.ContainsSphere( box.getCenter()-camera.frustum_pos, box.getArea()))//(camera.frustum.ContainsAABB(box - camera.frustum_pos))
         {
             if(leaf)
             {
                 if(CHxyz !is null)
                 if(!CHxyz.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHxyz.box.center-camera.frustum_pos, CHxyz.box.corner))
+                    if(camera.frustum.ContainsSphere( CHxyz.box.getCenter()-camera.frustum_pos, CHxyz.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHxyz);
                         if(CHxyz.rebuild && generated < max_generate)
@@ -172,7 +172,7 @@ class Branch
                 if(CHx1yz !is null)
                 if(!CHx1yz.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHx1yz.box.center-camera.frustum_pos, CHx1yz.box.corner))
+                    if(camera.frustum.ContainsSphere( CHx1yz.box.getCenter()-camera.frustum_pos, CHx1yz.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHx1yz);
                         if(CHx1yz.rebuild && generated < max_generate)
@@ -186,7 +186,7 @@ class Branch
                 if(CHxyz1 !is null)
                 if(!CHxyz1.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHxyz1.box.center-camera.frustum_pos, CHxyz1.box.corner))
+                    if(camera.frustum.ContainsSphere( CHxyz1.box.getCenter()-camera.frustum_pos, CHxyz1.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHxyz1);
                         if(CHxyz1.rebuild && generated < max_generate)
@@ -200,7 +200,7 @@ class Branch
                 if(CHx1yz1 !is null)
                 if(!CHx1yz1.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHx1yz1.box.center-camera.frustum_pos, CHx1yz1.box.corner))
+                    if(camera.frustum.ContainsSphere( CHx1yz1.box.getCenter()-camera.frustum_pos, CHx1yz1.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHx1yz1);
                         if(CHx1yz1.rebuild && generated < max_generate)
@@ -214,7 +214,7 @@ class Branch
                 if(CHxy1z !is null)
                 if(!CHxy1z.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHxy1z.box.center-camera.frustum_pos, CHxy1z.box.corner))
+                    if(camera.frustum.ContainsSphere( CHxy1z.box.getCenter()-camera.frustum_pos, CHxy1z.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHxy1z);
                         if(CHxy1z.rebuild && generated < max_generate)
@@ -228,7 +228,7 @@ class Branch
                 if(CHx1y1z !is null)
                 if(!CHx1y1z.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHx1y1z.box.center-camera.frustum_pos, CHx1y1z.box.corner))
+                    if(camera.frustum.ContainsSphere( CHx1y1z.box.getCenter()-camera.frustum_pos, CHx1y1z.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHx1y1z);
                         if(CHx1y1z.rebuild && generated < max_generate)
@@ -242,7 +242,7 @@ class Branch
                 if(CHxy1z1 !is null)
                 if(!CHxy1z1.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHxy1z1.box.center-camera.frustum_pos, CHxy1z1.box.corner))
+                    if(camera.frustum.ContainsSphere( CHxy1z1.box.getCenter()-camera.frustum_pos, CHxy1z1.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHxy1z1);
                         if(CHxy1z1.rebuild && generated < max_generate)
@@ -256,7 +256,7 @@ class Branch
                 if(CHx1y1z1 !is null)
                 if(!CHx1y1z1.empty)
                 {
-                    if(camera.frustum.ContainsSphere( CHx1y1z1.box.center-camera.frustum_pos, CHx1y1z1.box.corner))
+                    if(camera.frustum.ContainsSphere( CHx1y1z1.box.getCenter()-camera.frustum_pos, CHx1y1z1.box.getArea()))
                     {
                         chunks_to_render.push_back(@CHx1y1z1);
                         if(CHx1y1z1.rebuild && generated < max_generate)

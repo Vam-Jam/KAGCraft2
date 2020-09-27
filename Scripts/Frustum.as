@@ -61,7 +61,7 @@ class Frustum
 		plane5.Normalize();
 	}
 	
-	bool ContainsAABB(const AABB&in box)
+	bool ContainsAABB(AABBox3d&in box)
 	{
 		if (!plane0.Intersects(box))
 			return false;

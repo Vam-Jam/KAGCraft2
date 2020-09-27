@@ -16,10 +16,11 @@ class Plane
 		distance_to_origin = scalar;
 	}
 	
-	bool Intersects(const AABB&in box)
+	bool Intersects(AABBox3d&in box)
 	{
-		float d = DotProduct(box.center, normal);
-		float r = box.dim.x * Maths::Abs(normal.x) + box.dim.y * Maths::Abs(normal.y) + box.dim.z * Maths::Abs(normal.z);
+		Vec3f dim = box.getDim();
+		float d = DotProduct(box.getCenter(), normal);
+		float r = dim.x * Maths::Abs(normal.x) + dim.y * Maths::Abs(normal.y) + dim.z * Maths::Abs(normal.z);
 		float dpr = d + r;
 
 		if (dpr < -distance_to_origin)

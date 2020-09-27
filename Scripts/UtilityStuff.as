@@ -8,43 +8,43 @@ class USector
 
     USector(){}
 
-    USector(const AABB&in box, uint color, uint time)
+    USector(const AABBox3d&in box, uint color, uint time)
     {
         MakeSector(box, color);
         timer = getGameTime()+time;
     }
 
-    void MakeSector(const AABB&in box, uint color)
+    void MakeSector(const AABBox3d&in box, uint color)
     {
-        verts.push_back(Vertex(box.min.x,	box.min.y,	box.min.z,	0,	1,	color));
-        verts.push_back(Vertex(box.min.x,	box.max.y,	box.min.z,	1,	1,	color));
-        verts.push_back(Vertex(box.max.x,	box.max.y,	box.min.z,	1,	0,	color));
-        verts.push_back(Vertex(box.max.x,	box.min.y,	box.min.z,	0,	0,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	1,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	1,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	0,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	0,	color));
 
-        verts.push_back(Vertex(box.max.x,	box.min.y,	box.max.z,	0,	1,	color));
-        verts.push_back(Vertex(box.max.x,	box.max.y,	box.max.z,	1,	1,	color));
-        verts.push_back(Vertex(box.min.x,	box.max.y,	box.max.z,	1,	0,	color));
-        verts.push_back(Vertex(box.min.x,	box.min.y,	box.max.z,	0,	0,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	1,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	1,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	0,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	0,	color));
 
-        verts.push_back(Vertex(box.min.x,	box.min.y,	box.max.z,	0,	1,	color));
-        verts.push_back(Vertex(box.min.x,	box.max.y,	box.max.z,	1,	1,	color));
-        verts.push_back(Vertex(box.min.x,	box.max.y,	box.min.z,	1,	0,	color));
-        verts.push_back(Vertex(box.min.x,	box.min.y,	box.min.z,	0,	0,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	1,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	1,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	0,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	0,	color));
 
-        verts.push_back(Vertex(box.max.x,	box.min.y,	box.min.z,	0,	1,	color));
-        verts.push_back(Vertex(box.max.x,	box.max.y,	box.min.z,	1,	1,	color));
-        verts.push_back(Vertex(box.max.x,	box.max.y,	box.max.z,	1,	0,	color));
-        verts.push_back(Vertex(box.max.x,	box.min.y,	box.max.z,	0,	0,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	1,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	1,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	0,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	0,	color));
 
-        verts.push_back(Vertex(box.min.x,	box.max.y,	box.min.z,	0,	1,	color));
-        verts.push_back(Vertex(box.min.x,	box.max.y,	box.max.z,	1,	1,	color));
-        verts.push_back(Vertex(box.max.x,	box.max.y,	box.max.z,	1,	0,	color));
-        verts.push_back(Vertex(box.max.x,	box.max.y,	box.min.z,	0,	0,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	0,	1,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	1,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	0,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	0,	0,	color));
 
-        verts.push_back(Vertex(box.min.x,	box.min.y,	box.max.z,	0,	1,	color));
-        verts.push_back(Vertex(box.min.x,	box.min.y,	box.min.z,	1,	1,	color));
-        verts.push_back(Vertex(box.max.x,	box.min.y,	box.min.z,	1,	0,	color));
-        verts.push_back(Vertex(box.max.x,	box.min.y,	box.max.z,	0,	0,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	1,	color));
+        verts.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MinEdge.z,	1,	1,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MinEdge.z,	1,	0,	color));
+        verts.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	0,	color));
     }
 
     bool Dead()
@@ -58,7 +58,7 @@ class USector
     }
 }
 
-void AddSector(const AABB&in box, uint color, uint time)
+void AddSector(const AABBox3d&in box, uint color, uint time)
 {
     sectors.push_back(USector(box, color, time));
 }

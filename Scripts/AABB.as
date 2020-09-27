@@ -1,4 +1,4 @@
-
+/*
 class AABB
 {
 	Vec3f min;
@@ -72,13 +72,13 @@ class AABB
 
 	    return true;
 	}
-}
+}*/
 
-bool testAABBAABB(const AABB&in a, const AABB&in b)
+bool testAABBAABB(const AABBox3d&in a, const AABBox3d&in b)
 {
-    if ( a.min.x > b.max.x || a.max.x < b.min.x ) {return false;}
-    if ( a.min.y > b.max.y || a.max.y < b.min.y ) {return false;}
-    if ( a.min.z > b.max.z || a.max.z < b.min.z ) {return false;}
+    if ( a.MinEdge.x > b.MaxEdge.x || a.MaxEdge.x < b.MinEdge.x ) {return false;}
+    if ( a.MinEdge.y > b.MaxEdge.y || a.MaxEdge.y < b.MinEdge.y ) {return false;}
+    if ( a.MinEdge.z > b.MaxEdge.z || a.MaxEdge.z < b.MinEdge.z ) {return false;}
  
     // We have an overlap
     return true;

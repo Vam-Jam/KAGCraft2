@@ -1075,7 +1075,7 @@ class Chunk
     SMesh mesh;
     Vertex[] verts;
     uint16[] indices;
-    AABB box;
+    AABBox3d  box;
 
     Chunk(){}
 

@@ -314,18 +314,18 @@ class Player
 							}
 							if(place)
 							{
-								if(!testAABBAABB(AABB((pos+vel)-Vec3f(player_radius,0,player_radius), (pos+vel)+Vec3f(player_radius,player_height,player_radius)), AABB(pos_to_place, pos_to_place+Vec3f(1,1,1))))
+								if(!testAABBAABB(AABBox3d((pos+vel)-Vec3f(player_radius,0,player_radius), (pos+vel)+Vec3f(player_radius,player_height,player_radius)), AABBox3d(pos_to_place, pos_to_place+Vec3f(1,1,1))))
 								{
 									bool place = true;
 									for(int i = 0; i < other_players.size(); i++)
 									{
 										Vec3f _pos = other_players[i].pos;
-										if(testAABBAABB(AABB(_pos-Vec3f(player_radius,0,player_radius), _pos+Vec3f(player_radius,player_height,player_radius)), AABB(pos_to_place, pos_to_place+Vec3f(1,1,1))))
+										if(testAABBAABB(AABBox3d(_pos-Vec3f(player_radius,0,player_radius), _pos+Vec3f(player_radius,player_height,player_radius)), AABBox3d(pos_to_place, pos_to_place+Vec3f(1,1,1))))
 										{
 											place = false;
 											Sound::Play("NoAmmo.ogg");
-											AddSector(AABB(pos_to_place, pos_to_place+Vec3f(1,1,1)), 0x45FF0000, 20);
-											AddSector(AABB(_pos-Vec3f(player_radius,0,player_radius), _pos+Vec3f(player_radius,player_height,player_radius)), 0x45FF0000, 20);
+											AddSector(AABBox3d(pos_to_place, pos_to_place+Vec3f(1,1,1)), 0x45FF0000, 20);
+											AddSector(AABBox3d(_pos-Vec3f(player_radius,0,player_radius), _pos+Vec3f(player_radius,player_height,player_radius)), 0x45FF0000, 20);
 											break;
 										}
 									}
@@ -344,8 +344,8 @@ class Player
 								else
 								{
 									Sound::Play("NoAmmo.ogg");
-									AddSector(AABB(pos_to_place, pos_to_place+Vec3f(1,1,1)), 0x45FF0000, 20);
-									AddSector(AABB(pos-Vec3f(player_radius,0,player_radius), pos+Vec3f(player_radius,player_height,player_radius)), 0x45FF0000, 20);
+									AddSector(AABBox3d(pos_to_place, pos_to_place+Vec3f(1,1,1)), 0x45FF0000, 20);
+									AddSector(AABBox3d(pos-Vec3f(player_radius,0,player_radius), pos+Vec3f(player_radius,player_height,player_radius)), 0x45FF0000, 20);
 								}
 							}
 						}
@@ -605,7 +605,7 @@ class Player
 				{
 					Player@ pl_to_test = other_players[i];
 					if(pl_to_test.player is null) continue;
-					AABB box(pl_to_test.pos-Vec3f(player_radius, 0, player_radius), pl_to_test.pos+Vec3f(player_radius, player_height, player_radius));
+					AABBox3d box(pl_to_test.pos-Vec3f(player_radius, 0, player_radius), pl_to_test.pos+Vec3f(player_radius, player_height, player_radius));
 					if(box.intersectsWithLine(camera.pos, look_dir, 50000))
 					{
 						distances.push_back((pl_to_test.pos - pos).length());

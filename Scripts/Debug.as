@@ -48,38 +48,38 @@ void DrawHitbox(float x, float y, float z, uint color)
 	HitBoxes.push_back(Vertex(x+1,	y,	z+1,	0,	0,	color));
 }
 
-void DrawHitbox(const AABB&in box, uint color)
+void DrawHitbox(const AABBox3d&in box, uint color)
 {
 	//if(!isDebug()) return;
-    HitBoxes.push_back(Vertex(box.min.x,	box.min.y,	box.min.z,	0,	1,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.max.y,	box.min.z,	1,	1,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.max.y,	box.min.z,	1,	0,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.min.y,	box.min.z,	0,	0,	color));
+    HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	1,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	1,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	0,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	0,	color));
 
-	HitBoxes.push_back(Vertex(box.max.x,	box.min.y,	box.max.z,	0,	1,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.max.y,	box.max.z,	1,	1,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.max.y,	box.max.z,	1,	0,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.min.y,	box.max.z,	0,	0,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	1,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	1,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	0,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	0,	color));
 
-	HitBoxes.push_back(Vertex(box.min.x,	box.min.y,	box.max.z,	0,	1,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.max.y,	box.max.z,	1,	1,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.max.y,	box.min.z,	1,	0,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.min.y,	box.min.z,	0,	0,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	1,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	1,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	0,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	0,	color));
 
-	HitBoxes.push_back(Vertex(box.max.x,	box.min.y,	box.min.z,	0,	1,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.max.y,	box.min.z,	1,	1,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.max.y,	box.max.z,	1,	0,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.min.y,	box.max.z,	0,	0,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MinEdge.z,	0,	1,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	1,	1,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	0,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	0,	color));
 
-	HitBoxes.push_back(Vertex(box.min.x,	box.max.y,	box.min.z,	0,	1,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.max.y,	box.max.z,	1,	1,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.max.y,	box.max.z,	1,	0,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.max.y,	box.min.z,	0,	0,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	0,	1,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	1,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MaxEdge.z,	1,	0,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MaxEdge.y,	box.MinEdge.z,	0,	0,	color));
 
-	HitBoxes.push_back(Vertex(box.min.x,	box.min.y,	box.max.z,	0,	1,	color));
-	HitBoxes.push_back(Vertex(box.min.x,	box.min.y,	box.min.z,	1,	1,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.min.y,	box.min.z,	1,	0,	color));
-	HitBoxes.push_back(Vertex(box.max.x,	box.min.y,	box.max.z,	0,	0,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	1,	color));
+	HitBoxes.push_back(Vertex(box.MinEdge.x,	box.MinEdge.y,	box.MinEdge.z,	1,	1,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MinEdge.z,	1,	0,	color));
+	HitBoxes.push_back(Vertex(box.MaxEdge.x,	box.MinEdge.y,	box.MaxEdge.z,	0,	0,	color));
 }
 
 SColor[] colors = {
