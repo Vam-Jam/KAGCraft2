@@ -109,7 +109,7 @@ class Branch
 
     Branch(){}
 
-    Branch(const Vec3f&in pos_start, const Vec3f&in pos_end)
+    Branch(Vec3f&in pos_start, Vec3f&in pos_end)
     {
         box = AABB(pos_start, pos_end);
 
@@ -119,7 +119,8 @@ class Branch
 
             leaf = true;
 
-            Vec3f chunk_pos_start = pos_start/Vec3f(world.chunk_width, world.chunk_height, world.chunk_depth);
+            Vec3f chunk_pos_start = Vec3f(0,0,0);
+            pos_start / Vec3f(world.chunk_width, world.chunk_height, world.chunk_depth);
 
             @CHxyz =     world.getChunk(chunk_pos_start.x, chunk_pos_start.y, chunk_pos_start.z);
             @CHx1yz =    world.getChunk(chunk_pos_start.x+1, chunk_pos_start.y, chunk_pos_start.z);

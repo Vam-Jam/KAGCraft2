@@ -15,22 +15,22 @@ class AABB
 		dim = Vec3f(0, 0, 0);
 	}
 	
-	AABB(const Vec3f&in _min, const Vec3f&in _max)
+	AABB(Vec3f&in _min, Vec3f&in _max)
 	{
 		min = _min;
 		max = _max;
 		UpdateAttributes();
 	}
 	
-	AABB(const Vec3f&in middle, float range)
+	AABB(Vec3f&in middle, float range)
 	{
 		min = middle-range;
 		max = middle+range;
 		UpdateAttributes();
 	}
 
-	AABB opAdd(const Vec3f&in oof) { return AABB(min + oof, max + oof); }
-	AABB opSub(const Vec3f&in oof) { return AABB(min - oof, max - oof); }
+	AABB opAdd(Vec3f&in oof) { return AABB(min + oof, max + oof); }
+	AABB opSub(Vec3f&in oof) { return AABB(min - oof, max - oof); }
 	
 	void UpdateAttributes()
 	{

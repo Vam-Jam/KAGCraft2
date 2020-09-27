@@ -735,7 +735,7 @@ class Player
 				if(vel.y < 0.0001f && vel.y > -0.0001f) vel.y = 0;
 				if(vel.z < 0.0001f && vel.z > -0.0001f) vel.z = 0;
 
-				CollisionResponse(pos, vel);
+				CollisionResponse(pos, vel, pos, vel);
 
 				if(Crouch && onGround)
 				{
@@ -770,30 +770,30 @@ class Player
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, 0, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_body.RenderMesh();
+		mesh_body.Draw();
 
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y+1.5f, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, -dir_y, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_head.RenderMesh();
+		mesh_head.Draw();
 
 		f32 vem_mult = Maths::Min(Maths::Pow(vel.Length()*30.0f, 1.75f), 75);
 		f32 limb_rotation = Maths::Cos(getInterGameTime()/3.5f)*vem_mult;
 
 		Matrix::SetRotationDegrees(model_matr, limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_arm_left.RenderMesh();
+		mesh_arm_left.Draw();
 		Matrix::SetRotationDegrees(model_matr, -limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_arm_right.RenderMesh();
+		mesh_arm_right.Draw();
 
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y+0.75f, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_leg_left.RenderMesh();
+		mesh_leg_left.Draw();
 		Matrix::SetRotationDegrees(model_matr, -limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_leg_right.RenderMesh(); // \\ */
+		mesh_leg_right.Draw(); // \\ */
 	}
 
 	void RenderNickname()
@@ -1006,7 +1006,9 @@ class Player
 	}
 }
 
-void CollisionResponse(Vec3f&inout position, Vec3f&inout velocity)
+
+// Temp work around, Vec3f doesnt support &inout
+void CollisionResponse(Vec3f&in position, Vec3f&in velocity, Vec3f&out pos, Vec3f& out vel) 
 {
 	//x collision
 	Vec3f xPosition(position.x + velocity.x, position.y, position.z);
@@ -1055,6 +1057,10 @@ void CollisionResponse(Vec3f&inout position, Vec3f&inout velocity)
 		velocity.y = 0;
 	}
 	position.y += velocity.y;
+
+
+	pos = position;
+	vel = velocity;
 }
 
 bool isColliding(const Vec3f&in position, const Vec3f&in next_position)

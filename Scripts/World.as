@@ -777,7 +777,7 @@ class World
         map_material.SetFlag(SMaterial::ZBUFFER, true);
         map_material.SetFlag(SMaterial::ZWRITE_ENABLE, true);
         map_material.SetFlag(SMaterial::BACK_FACE_CULLING, true);
-        map_material.SetMaterialType(SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF);
+        map_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
         map_material.SetFlag(SMaterial::FOG_ENABLE, true);
 
         getRules().set("map_material", @map_material);
@@ -1082,8 +1082,8 @@ class Chunk
     Chunk(World@ reference, uint32 _index)
     {
         @_world = @reference;
-        mesh.Clear();
-        mesh.SetHardwareMapping(SMesh::STATIC);
+        // \\mesh.Clear();
+        // \\mesh.SetHardwareMapping(Driver::STATIC);
         index = _index;
         x = _index % _world.world_width; z = (_index / _world.world_width) % _world.world_depth; y = _index / _world.world_width_depth;
         world_x = x*_world.chunk_width; world_z = z*_world.chunk_depth; world_y = y*_world.chunk_height;
@@ -1132,10 +1132,10 @@ class Chunk
         }
         else
         {
-            mesh.SetVertex(verts);
-            mesh.SetIndices(indices);
-            mesh.SetDirty(SMesh::VERTEX_INDEX);
-            mesh.BuildMesh();
+            // \\mesh.SetVertex(verts);
+            // \\mesh.SetIndices(indices);
+            // \\mesh.SetDirty(Driver::VERTEX_INDEX);
+            // \\mesh.BuildMesh();
         }
     }
 
@@ -1341,7 +1341,7 @@ class Chunk
 
     void Render()
     {
-        mesh.RenderMesh();
+        mesh.Draw();
     }
 }
 
