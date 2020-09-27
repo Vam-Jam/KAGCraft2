@@ -106,10 +106,10 @@ bool onClientProcessChat(CRules@ this, const string&in text_in, string&out text_
 					{
 						SMaterial@ map_material;
 						getRules().get("map_material", @map_material);
-						map_material.AddTexture("SOLID", 0);
+						map_material.SetTexture("SOLID", 0);
 						Texture::destroy("Block_Textures");
 						Texture::createFromFile("Block_Textures", "Textures/Blocks_"+name+".png");
-						map_material.AddTexture("Block_Textures", 0);
+						map_material.SetTexture("Block_Textures", 0);
 
 						client_AddToChat("Changing block textures to \""+name+"\".", chat_colors::color_green);
 					}

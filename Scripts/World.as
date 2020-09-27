@@ -771,7 +771,7 @@ class World
 
     void SetUpMaterial()
     {
-        map_material.AddTexture("Block_Textures", 0);
+        map_material.SetTexture("Block_Textures", 0);
         map_material.DisableAllFlags();
         map_material.SetFlag(SMaterial::COLOR_MASK, true);
         map_material.SetFlag(SMaterial::ZBUFFER, true);

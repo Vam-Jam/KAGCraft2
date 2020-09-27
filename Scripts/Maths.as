@@ -1,4 +1,4 @@
-
+/*
 class Vec3f
 {
 	float x;
@@ -112,7 +112,7 @@ class Vec3f
 		return x+", "+y+", "+z;
 	}
 }
-
+*/
 float DotProduct(const Vec3f&in v1, const Vec3f&in v2)
 {
     return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
