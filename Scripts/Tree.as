@@ -33,7 +33,7 @@ class Root
 
     void Init()
     {
-        box = AABB(Vec3f(0, 0, 0), Vec3f(world.map_width, world.map_height, world.map_depth));
+        box = AABBox3d(Vec3f(0, 0, 0), Vec3f(world.map_width, world.map_height, world.map_depth));
 
         @BRxz =     @Branch(Vec3f(0,                0, 0),              Vec3f(world.map_width/4,      world.map_height, world.map_depth/4));
         @BRx1z =    @Branch(Vec3f(world.map_width/4,      0, 0),              Vec3f(world.map_width/2,      world.map_height, world.map_depth/4));
@@ -111,7 +111,7 @@ class Branch
 
     Branch(Vec3f&in pos_start, Vec3f&in pos_end)
     {
-        box = AABB(pos_start, pos_end);
+        box = AABBox3d(pos_start, pos_end);
 
         if(pos_end.y-pos_start.y <= world.chunk_height*2)
         {

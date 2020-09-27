@@ -1088,7 +1088,7 @@ class Chunk
         x = _index % _world.world_width; z = (_index / _world.world_width) % _world.world_depth; y = _index / _world.world_width_depth;
         world_x = x*_world.chunk_width; world_z = z*_world.chunk_depth; world_y = y*_world.chunk_height;
         world_x_bounds = world_x+_world.chunk_width; world_z_bounds = world_z+_world.chunk_depth; world_y_bounds = world_y+_world.chunk_height;
-        box = AABB(Vec3f(world_x, world_y, world_z), Vec3f(world_x_bounds, world_y_bounds, world_z_bounds));
+        box = AABBox3d(Vec3f(world_x, world_y, world_z), Vec3f(world_x_bounds, world_y_bounds, world_z_bounds));
 
         GenerateMesh();
     }
