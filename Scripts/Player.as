@@ -54,17 +54,17 @@ class Player
 	float dig_timer;
 	uint8 hand_block = Block::stone;
 
-	SMaterial player_material;
-	SMaterial player_frozen_material;
+	SMaterial@ player_material = SMaterial();
+	SMaterial@ player_frozen_material = SMaterial();
 	
-	SMesh mesh_nickname;
+	SMesh@ mesh_nickname = SMesh();
 	
-	SMesh mesh_head;
-	SMesh mesh_body;
-	SMesh mesh_arm_right;
-	SMesh mesh_arm_left;
-	SMesh mesh_leg_right;
-	SMesh mesh_leg_left;
+	SMesh@ mesh_head = SMesh();
+	SMesh@ mesh_body = SMesh();
+	SMesh@ mesh_arm_right = SMesh();
+	SMesh@ mesh_arm_left = SMesh();
+	SMesh@ mesh_leg_right = SMesh();
+	SMesh@ mesh_leg_left = SMesh();
 
 	Player(){}
 
@@ -85,7 +85,7 @@ class Player
 
 	void MakeModel()
 	{
-		/* // \\ if(	player.getUsername() == "Turtlecake" ||
+		if(	player.getUsername() == "Turtlecake" ||
 			player.getUsername() == "MintMango" ||
 			player.getUsername() == "Mazey" ||
 			player.getUsername() == "epsilon" ||
@@ -95,13 +95,13 @@ class Player
 			player.getUsername() == "Netormozi_snekersni" ||
 			player.getUsername() == "GoldenGuy")
 		{
-			player_material.AddTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
-			player_frozen_material.AddTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
+			player_material.SetTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
+			player_frozen_material.SetTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
 		}
 		else
 		{
-			player_material.AddTexture("Textures/Skins/Default/skin"+XORRandom(8)+".png", 0);
-			player_frozen_material.AddTexture("Textures/Skins/Default/skin"+XORRandom(8)+".png", 0);
+			player_material.SetTexture("Textures/Skins/Default/skin"+XORRandom(8)+".png", 0);
+			player_frozen_material.SetTexture("Textures/Skins/Default/skin"+XORRandom(8)+".png", 0);
 		}
 
 		player_material.DisableAllFlags();
@@ -110,7 +110,7 @@ class Player
 		player_material.SetFlag(SMaterial::ZWRITE_ENABLE, true);
 		player_material.SetFlag(SMaterial::BACK_FACE_CULLING, true);
 		player_material.SetFlag(SMaterial::FOG_ENABLE, true);
-		player_material.SetMaterialType(SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF);
+		player_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
 
 		player_frozen_material.DisableAllFlags();
 		player_frozen_material.SetFlag(SMaterial::COLOR_MASK, true);
@@ -118,62 +118,78 @@ class Player
 		player_frozen_material.SetFlag(SMaterial::ZWRITE_ENABLE, true);
 		player_frozen_material.SetFlag(SMaterial::BACK_FACE_CULLING, true);
 		player_frozen_material.SetFlag(SMaterial::FOG_ENABLE, true);
-		player_frozen_material.SetMaterialType(SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF);
+		player_frozen_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
 		player_frozen_material.SetFlag(SMaterial::LIGHTING, true);
-		player_frozen_material.SetEmissiveColor(0xFFFF6060);
-
-		mesh_head.Clear();
-		mesh_head.SetMaterial(player_material);
-		mesh_head.SetVertex(player.getUsername() == "Turtlecake" ? player_head_jenny : player_head);
-		mesh_head.SetIndices(player_IDs);
-		mesh_head.SetDirty(SMesh::VERTEX_INDEX);
-		mesh_head.SetHardwareMapping(SMesh::STATIC);
-		mesh_head.BuildMesh();
-
-		mesh_body.Clear();
-		mesh_body.SetMaterial(player_material);
-		mesh_body.SetVertex(player_body);
-		mesh_body.SetIndices(player_IDs);
-		mesh_body.SetDirty(SMesh::VERTEX_INDEX);
-		mesh_body.SetHardwareMapping(SMesh::STATIC);
-		mesh_body.BuildMesh();
-
-		mesh_arm_right.Clear();
-		mesh_arm_right.SetMaterial(player_material);
-		mesh_arm_right.SetVertex(player_arm_right);
-		mesh_arm_right.SetIndices(player_IDs);
-		mesh_arm_right.SetDirty(SMesh::VERTEX_INDEX);
-		mesh_arm_right.SetHardwareMapping(SMesh::STATIC);
-		mesh_arm_right.BuildMesh();
-
-		mesh_arm_left.Clear();
-		mesh_arm_left.SetMaterial(player_material);
-		mesh_arm_left.SetVertex(player_arm_left);
-		mesh_arm_left.SetIndices(player_IDs);
-		mesh_arm_left.SetDirty(SMesh::VERTEX_INDEX);
-		mesh_arm_left.SetHardwareMapping(SMesh::STATIC);
-		mesh_arm_left.BuildMesh();
+		player_frozen_material.EmissiveColor = 0xFFFF6060;
 		
-		mesh_leg_right.Clear();
-		mesh_leg_right.SetMaterial(player_material);
-		mesh_leg_right.SetVertex(player_leg_right);
-		mesh_leg_right.SetIndices(player_IDs);
-		mesh_leg_right.SetDirty(SMesh::VERTEX_INDEX);
-		mesh_leg_right.SetHardwareMapping(SMesh::STATIC);
-		mesh_leg_right.BuildMesh();
+		{
+			SMeshBuffer@ buffer = SMeshBuffer();
+
+			buffer.SetMaterial(player_material);
+			buffer.SetVertices(player.getUsername() == "Turtlecake" ? player_head_jenny : player_head);
+			buffer.SetIndices(player_IDs);
+			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
+			buffer.RecalculateBoundingBox();
+			mesh_head.AddMeshBuffer(buffer);
+		}
+
+		{
+			SMeshBuffer@ buffer = SMeshBuffer();
+			buffer.SetMaterial(player_material);
+			buffer.SetVertices(player_body);
+			buffer.SetIndices(player_IDs);
+			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
+			buffer.RecalculateBoundingBox();
+			mesh_body.AddMeshBuffer(buffer);
+		}
+
+		{
+			SMeshBuffer@ buffer = SMeshBuffer();
+			buffer.SetMaterial(player_material);
+			buffer.SetVertices(player_arm_right);
+			buffer.SetIndices(player_IDs);
+			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
+			buffer.RecalculateBoundingBox();
+			mesh_arm_right.AddMeshBuffer(buffer);
+		}
+
+		{
+			SMeshBuffer@ buffer = SMeshBuffer();
+			buffer.SetMaterial(player_material);
+			buffer.SetVertices(player_arm_right);
+			buffer.SetIndices(player_IDs);
+			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
+			buffer.RecalculateBoundingBox();
+			mesh_arm_left.AddMeshBuffer(buffer);
+		}
+
+		{
+			SMeshBuffer@ buffer = SMeshBuffer();
+			buffer.SetMaterial(player_material);
+			buffer.SetVertices(player_leg_right);
+			buffer.SetIndices(player_IDs);
+			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
+			buffer.RecalculateBoundingBox();
+			mesh_leg_right.AddMeshBuffer(buffer);
+		}
 		
-		mesh_leg_left.Clear();
-		mesh_leg_left.SetMaterial(player_material);
-		mesh_leg_left.SetVertex(player_leg_left);
-		mesh_leg_left.SetIndices(player_IDs);
-		mesh_leg_left.SetDirty(SMesh::VERTEX_INDEX);
-		mesh_leg_left.SetHardwareMapping(SMesh::STATIC);
-		mesh_leg_left.BuildMesh(); // \\ */ 
+
+		{
+			SMeshBuffer@ buffer = SMeshBuffer();
+			buffer.SetMaterial(player_material);
+			buffer.SetVertices(player_leg_left);
+			buffer.SetIndices(player_IDs);
+			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
+			buffer.RecalculateBoundingBox();
+			mesh_leg_left.AddMeshBuffer(buffer);
+		}
 	}
 
 	void MakeNickname()
 	{
-		MakeNickName(player.getUsername(), mesh_nickname);
+		SMeshBuffer@ buffer = SMeshBuffer();
+		MakeNickName(player.getUsername(), buffer);
+		mesh_nickname.AddMeshBuffer(buffer);
 	}
 
     void Update()
@@ -805,7 +821,7 @@ class Player
 		Render::SetModelTransform(billboard_model);
 		Render::SetAlphaBlend(true);
 		Render::SetZBuffer(false, true);
-		// \\mesh_nickname.RenderMeshWithMaterial();
+		mesh_nickname.Draw();
 		Render::SetAlphaBlend(false);
 		Render::SetZBuffer(true, true);
 	}

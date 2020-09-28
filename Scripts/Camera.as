@@ -29,7 +29,7 @@ class Camera
 	
 	Frustum frustum;
 
-	SMesh camera_model;
+	SMesh@ camera_model;
 	
 	Camera()
 	{
@@ -52,9 +52,9 @@ class Camera
 		Matrix::MakePerspective(projection, fov, float(getDriver().getScreenWidth()) / float(getDriver().getScreenHeight()), z_near, z_far);
 		updateFrustum();
 
-		// \\camera_model.LoadObjIntoMesh("Models/Misc/Camera/Camera.obj");
-		// \\camera_model.GetMaterial().SetFlag(SMaterial::LIGHTING, false);
-		// \\camera_model.GetMaterial().SetFlag(SMaterial::BILINEAR_FILTER, false);
+		@camera_model = SMesh::loadObjIntoMesh("Models/Misc/Camera/Camera.obj");
+		camera_model.SetMaterialFlag(SMaterial::LIGHTING, false);
+		camera_model.SetMaterialFlag(SMaterial::BILINEAR_FILTER, false);
 	}
 	
 	void move(const Vec3f&in nextpos, bool instantly)

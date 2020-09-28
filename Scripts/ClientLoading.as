@@ -6,8 +6,8 @@ namespace Loading
 	int state = 0;
 	string loading_string = "Init.";
 
-	SMesh into_model_head;
-	SMesh into_model_body;
+	SMesh@ into_model_head = SMesh();
+	SMesh@ into_model_body = SMesh();
 	int intro_timer = 0;
 
 	enum val
@@ -105,18 +105,18 @@ namespace Loading
 				Fill[0].col = Fill[1].col = Fill[2].col = Fill[3].col = color_black;
 
 				intro_timer = 0;
-				/* // \\ into_model_head.LoadObjIntoMesh("Models/Misc/Intro/intro_head.obj");
-				into_model_head.GetMaterial(0).SetFlag(SMaterial::LIGHTING, false);
-				into_model_head.GetMaterial(0).SetFlag(SMaterial::BACK_FACE_CULLING, false);
-				into_model_head.GetMaterial(0).SetFlag(SMaterial::BILINEAR_FILTER, false);
-				into_model_head.GetMaterial(0).SetFlag(SMaterial::BLEND_OPERATION, true);
-				into_model_head.GetMaterial(0).SetFlag(SMaterial::FOG_ENABLE, true);
-				into_model_body.LoadObjIntoMesh("Models/Misc/Intro/intro_body.obj");
-				into_model_body.GetMaterial(0).SetFlag(SMaterial::LIGHTING, false);
-				into_model_body.GetMaterial(0).SetFlag(SMaterial::BACK_FACE_CULLING, false);
-				into_model_body.GetMaterial(0).SetFlag(SMaterial::BILINEAR_FILTER, false);
-				into_model_body.GetMaterial(0).SetFlag(SMaterial::BLEND_OPERATION, true);
-				into_model_body.GetMaterial(0).SetFlag(SMaterial::FOG_ENABLE, true); // \\ */
+				@into_model_head = SMesh::loadObjIntoMesh("Models/Misc/Intro/intro_head.obj");
+				into_model_head.SetMaterialFlag(SMaterial::LIGHTING, false);
+				into_model_head.SetMaterialFlag(SMaterial::BACK_FACE_CULLING, false);
+				into_model_head.SetMaterialFlag(SMaterial::BILINEAR_FILTER, false);
+				into_model_head.SetMaterialFlag(SMaterial::BLEND_OPERATION, true);
+				into_model_head.SetMaterialFlag(SMaterial::FOG_ENABLE, true);
+				@into_model_body = SMesh::loadObjIntoMesh("Models/Misc/Intro/intro_body.obj");
+				into_model_body.SetMaterialFlag(SMaterial::LIGHTING, false);
+				into_model_body.SetMaterialFlag(SMaterial::BACK_FACE_CULLING, false);
+				into_model_body.SetMaterialFlag(SMaterial::BILINEAR_FILTER, false);
+				into_model_body.SetMaterialFlag(SMaterial::BLEND_OPERATION, true);
+				into_model_body.SetMaterialFlag(SMaterial::FOG_ENABLE, true);
 
 				Render::addScript(Render::layer_background, "Client.as", "Render", 1);
 				

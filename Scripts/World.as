@@ -77,7 +77,7 @@ class World
     //uint8[][][] faces_bits;
     uint8[] faces_bits;
     Chunk@[] chunks;
-    SMaterial map_material;
+    SMaterial@ map_material = SMaterial();
 
     Noise@ noise;
     Random@ rand;
@@ -779,7 +779,6 @@ class World
         map_material.SetFlag(SMaterial::BACK_FACE_CULLING, true);
         map_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
         map_material.SetFlag(SMaterial::FOG_ENABLE, true);
-
         getRules().set("map_material", @map_material);
     }
 

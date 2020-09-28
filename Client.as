@@ -341,7 +341,7 @@ void Render(int id)
 				Matrix::MakeIdentity(model);
 				Render::SetTransform(model, camera.view, camera.projection);
 				
-				// \\Loading::into_model_body.RenderMeshWithMaterial();
+				Loading::into_model_body.DrawWithMaterial();
 
 				float look_at_me = 0;
 				if(Loading::intro_timer >= 100 && Loading::intro_timer <= 250)
@@ -362,7 +362,7 @@ void Render(int id)
 				Matrix::SetRotationDegrees(temp_mat, 0, -look_at_me, 0);
 				model = Matrix_Multiply(model, temp_mat);
 				Render::SetModelTransform(model);
-				// \\Loading::into_model_head.RenderMeshWithMaterial();
+				Loading::into_model_head.DrawWithMaterial();
 				Matrix::MakeIdentity(model);
 				Render::SetModelTransform(model);
 
