@@ -109,6 +109,7 @@ class Frustum
 			return false;
 		if (plane5.DistanceToPoint(point) < -radius)
 			return false;
+
 		return true;
 	}
 

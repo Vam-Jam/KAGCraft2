@@ -167,7 +167,7 @@ class Player
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
 			buffer.SetMaterial(@player_material);
-			buffer.SetVertices(player_arm_right);
+			buffer.SetVertices(player_arm_left);
 			buffer.SetIndices(player_IDs);
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
 			buffer.RecalculateBoundingBox();
@@ -786,42 +786,42 @@ class Player
 	{
 		if(Frozen)
 		{
-			// \\ player_frozen_material.SetVideoMaterial();
+			player_frozen_material.SetAsGlobalVideoMaterial();
 		}
 		else
 		{
-			// \\ player_material.SetVideoMaterial();
+			player_material.SetAsGlobalVideoMaterial();
 		}
 		
-		/* // \\ float[] model_matr;
+		float[] model_matr;
 		Matrix::MakeIdentity(model_matr);
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, 0, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_body.Draw();
+		mesh_body.DrawWithMaterial();
 
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y+1.5f, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, -dir_y, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_head.Draw();
+		mesh_head.DrawWithMaterial();
 
-		f32 vem_mult = Maths::Min(Maths::Pow(vel.Length()*30.0f, 1.75f), 75);
+		f32 vem_mult = Maths::Min(Maths::Pow(vel.length()*30.0f, 1.75f), 75);
 		f32 limb_rotation = Maths::Cos(getInterGameTime()/3.5f)*vem_mult;
 
 		Matrix::SetRotationDegrees(model_matr, limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_arm_left.Draw();
+		mesh_arm_left.DrawWithMaterial();
 		Matrix::SetRotationDegrees(model_matr, -limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_arm_right.Draw();
+		mesh_arm_right.DrawWithMaterial();
 
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y+0.75f, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_leg_left.Draw();
+		mesh_leg_left.DrawWithMaterial();
 		Matrix::SetRotationDegrees(model_matr, -limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_leg_right.Draw(); // \\ */
+		mesh_leg_right.DrawWithMaterial();
 	}
 
 	void RenderNickname()
