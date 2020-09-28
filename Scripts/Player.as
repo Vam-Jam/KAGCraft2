@@ -85,6 +85,7 @@ class Player
 
 	void MakeModel()
 	{
+		print("sup123");
 		if(	player.getUsername() == "Turtlecake" ||
 			player.getUsername() == "MintMango" ||
 			player.getUsername() == "Mazey" ||
@@ -95,7 +96,9 @@ class Player
 			player.getUsername() == "Netormozi_snekersni" ||
 			player.getUsername() == "GoldenGuy")
 		{
+			print("hi skin");
 			player_material.SetTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
+			print("hi skin 3");
 			player_frozen_material.SetTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
 		}
 		else
@@ -104,6 +107,8 @@ class Player
 			player_frozen_material.SetTexture("Textures/Skins/Default/skin"+XORRandom(8)+".png", 0);
 		}
 
+
+		print("matrail");
 		player_material.DisableAllFlags();
 		player_material.SetFlag(SMaterial::COLOR_MASK, true);
 		player_material.SetFlag(SMaterial::ZBUFFER, true);
@@ -111,7 +116,7 @@ class Player
 		player_material.SetFlag(SMaterial::BACK_FACE_CULLING, true);
 		player_material.SetFlag(SMaterial::FOG_ENABLE, true);
 		player_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
-
+		print("material 2");
 		player_frozen_material.DisableAllFlags();
 		player_frozen_material.SetFlag(SMaterial::COLOR_MASK, true);
 		player_frozen_material.SetFlag(SMaterial::ZBUFFER, true);
@@ -121,21 +126,27 @@ class Player
 		player_frozen_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
 		player_frozen_material.SetFlag(SMaterial::LIGHTING, true);
 		player_frozen_material.EmissiveColor = 0xFFFF6060;
-		
+		print("material ended");
+
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
-
-			buffer.SetMaterial(player_material);
+			print("setting");
+			buffer.SetMaterial(@player_material);
+			print("not setting");
 			buffer.SetVertices(player.getUsername() == "Turtlecake" ? player_head_jenny : player_head);
+			print("setting");
 			buffer.SetIndices(player_IDs);
+			print("setting");
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
+			print("setting1");
 			buffer.RecalculateBoundingBox();
+			print("settinga");
 			mesh_head.AddMeshBuffer(buffer);
 		}
 
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
-			buffer.SetMaterial(player_material);
+			buffer.SetMaterial(@player_material);
 			buffer.SetVertices(player_body);
 			buffer.SetIndices(player_IDs);
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
@@ -145,7 +156,7 @@ class Player
 
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
-			buffer.SetMaterial(player_material);
+			buffer.SetMaterial(@player_material);
 			buffer.SetVertices(player_arm_right);
 			buffer.SetIndices(player_IDs);
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
@@ -155,7 +166,7 @@ class Player
 
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
-			buffer.SetMaterial(player_material);
+			buffer.SetMaterial(@player_material);
 			buffer.SetVertices(player_arm_right);
 			buffer.SetIndices(player_IDs);
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
@@ -165,7 +176,7 @@ class Player
 
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
-			buffer.SetMaterial(player_material);
+			buffer.SetMaterial(@player_material);
 			buffer.SetVertices(player_leg_right);
 			buffer.SetIndices(player_IDs);
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
@@ -176,13 +187,14 @@ class Player
 
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
-			buffer.SetMaterial(player_material);
+			buffer.SetMaterial(@player_material);
 			buffer.SetVertices(player_leg_left);
 			buffer.SetIndices(player_IDs);
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
 			buffer.RecalculateBoundingBox();
 			mesh_leg_left.AddMeshBuffer(buffer);
 		}
+		print("bye 1234");
 	}
 
 	void MakeNickname()

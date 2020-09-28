@@ -9,7 +9,7 @@ Chunk@[] chunks_to_render;
 
 class Root
 {
-    AABBox3d box;
+    AABBox3d box = AABBox3d();
 
     Branch@ BRxz;
     Branch@ BRx1z;
@@ -33,8 +33,9 @@ class Root
 
     void Init()
     {
+        print("hi");
         box = AABBox3d(Vec3f(0, 0, 0), Vec3f(world.map_width, world.map_height, world.map_depth));
-
+        print("bye");
         @BRxz =     @Branch(Vec3f(0,                0, 0),              Vec3f(world.map_width/4,      world.map_height, world.map_depth/4));
         @BRx1z =    @Branch(Vec3f(world.map_width/4,      0, 0),              Vec3f(world.map_width/2,      world.map_height, world.map_depth/4));
         @BRxz1 =    @Branch(Vec3f(0,                0, world.map_depth/4),    Vec3f(world.map_width/4,      world.map_height, world.map_depth/2));
@@ -54,6 +55,7 @@ class Root
         @BRx3z2 =   @Branch(Vec3f(world.map_width/4*3,    0, world.map_depth/2),    Vec3f(world.map_width,        world.map_height, world.map_depth/4*3));
         @BRx2z3 =   @Branch(Vec3f(world.map_width/2,      0, world.map_depth/4*3),  Vec3f(world.map_width/4*3,    world.map_height, world.map_depth));
         @BRx3z3 =   @Branch(Vec3f(world.map_width/4*3,    0, world.map_depth/4*3),  Vec3f(world.map_width,        world.map_height, world.map_depth));
+        print("ended");
     }
 
     void Check()

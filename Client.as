@@ -433,7 +433,7 @@ void Render(int id)
 	Render::SetTransform(model, camera.view, camera.projection);
 
 	// render map
-	// \\world.map_material.SetVideoMaterial();
+	world.map_material.SetAsGlobalVideoMaterial();
 	for(int i = 0; i < chunks_to_render.size(); i++)
 	{
 		chunks_to_render[i].Render();
@@ -496,7 +496,7 @@ void Render(int id)
 		// actual camera model (thanks jenny :3 )
 		Matrix::SetRotationDegrees(model, -camera.frustum_dir_y, camera.frustum_dir_x, 0);
 		Render::SetModelTransform(model);
-		// \\camera.camera_model.RenderMeshWithMaterial();
+		camera.camera_model.DrawWithMaterial();
 	}
 
 	// calculate interpolation multiplier	

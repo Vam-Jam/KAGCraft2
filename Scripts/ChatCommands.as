@@ -104,14 +104,14 @@ bool onClientProcessChat(CRules@ this, const string&in text_in, string&out text_
 					string name = tokens[1];
 					if(name == "Classic" || name == "Jenny" || name == "Minecraft" || name == "PublicEnemy" || name == "3x3")
 					{
-						/*SMaterial@ map_material;
+						SMaterial@ map_material;
 						getRules().get("map_material", @map_material);
 						map_material.SetTexture("SOLID", 0);
 						Texture::destroy("Block_Textures");
 						Texture::createFromFile("Block_Textures", "Textures/Blocks_"+name+".png");
 						map_material.SetTexture("Block_Textures", 0);
 
-						client_AddToChat("Changing block textures to \""+name+"\".", chat_colors::color_green);*/
+						client_AddToChat("Changing block textures to \""+name+"\".", chat_colors::color_green);
 					}
 					else
 					{
