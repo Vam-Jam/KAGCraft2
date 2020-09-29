@@ -9,7 +9,7 @@ Chunk@[] chunks_to_render;
 
 class Root
 {
-    AABBox3d box = AABBox3d();
+    AABBox3d box;
 
     Branch@ BRxz;
     Branch@ BRx1z;
@@ -33,9 +33,7 @@ class Root
 
     void Init()
     {
-        print("hi");
         box = AABBox3d(Vec3f(0, 0, 0), Vec3f(world.map_width, world.map_height, world.map_depth));
-        print("bye");
         @BRxz =     @Branch(Vec3f(0,                0, 0),              Vec3f(world.map_width/4,      world.map_height, world.map_depth/4));
         @BRx1z =    @Branch(Vec3f(world.map_width/4,      0, 0),              Vec3f(world.map_width/2,      world.map_height, world.map_depth/4));
         @BRxz1 =    @Branch(Vec3f(0,                0, world.map_depth/4),    Vec3f(world.map_width/4,      world.map_height, world.map_depth/2));
@@ -45,7 +43,7 @@ class Root
         @BRx3z =    @Branch(Vec3f(world.map_width/4*3,    0, 0),              Vec3f(world.map_width,        world.map_height, world.map_depth/4));
         @BRx2z1 =   @Branch(Vec3f(world.map_width/2,      0, world.map_depth/4),    Vec3f(world.map_width/4*3,    world.map_height, world.map_depth/2));
         @BRx3z1 =   @Branch(Vec3f(world.map_width/4*3,    0, world.map_depth/4),    Vec3f(world.map_width,        world.map_height, world.map_depth/2));
-
+        
         @BRxz2 =    @Branch(Vec3f(0,                0, world.map_depth/2),    Vec3f(world.map_width/4,      world.map_height, world.map_depth/4*3));
         @BRx1z2 =   @Branch(Vec3f(world.map_width/4,      0, world.map_depth/2),    Vec3f(world.map_width/2,      world.map_height, world.map_depth/4*3));
         @BRxz3 =    @Branch(Vec3f(0,                0, world.map_depth/4*3),  Vec3f(world.map_width/4,      world.map_height, world.map_depth));
@@ -55,7 +53,6 @@ class Root
         @BRx3z2 =   @Branch(Vec3f(world.map_width/4*3,    0, world.map_depth/2),    Vec3f(world.map_width,        world.map_height, world.map_depth/4*3));
         @BRx2z3 =   @Branch(Vec3f(world.map_width/2,      0, world.map_depth/4*3),  Vec3f(world.map_width/4*3,    world.map_height, world.map_depth));
         @BRx3z3 =   @Branch(Vec3f(world.map_width/4*3,    0, world.map_depth/4*3),  Vec3f(world.map_width,        world.map_height, world.map_depth));
-        print("ended");
     }
 
     void Check()
@@ -121,8 +118,7 @@ class Branch
 
             leaf = true;
 
-            Vec3f chunk_pos_start = Vec3f(0,0,0);
-            pos_start / Vec3f(world.chunk_width, world.chunk_height, world.chunk_depth);
+            Vec3f chunk_pos_start = pos_start / Vec3f(world.chunk_width, world.chunk_height, world.chunk_depth);
 
             @CHxyz =     world.getChunk(chunk_pos_start.x, chunk_pos_start.y, chunk_pos_start.z);
             @CHx1yz =    world.getChunk(chunk_pos_start.x+1, chunk_pos_start.y, chunk_pos_start.z);
@@ -160,14 +156,11 @@ class Branch
                 if(CHxyz !is null)
                 if(!CHxyz.empty)
                 {
-                    print("4");
                     if(camera.frustum.ContainsSphere( CHxyz.box.getCenter()-camera.frustum_pos, CHxyz.box.getSomething()))
                     {
-                        print("5");
                         chunks_to_render.push_back(@CHxyz);
                         if(CHxyz.rebuild && generated < max_generate)
                         {
-                            print("6");
                             CHxyz.GenerateMesh();
                             generated++;
                         }

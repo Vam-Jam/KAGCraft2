@@ -85,7 +85,6 @@ class Player
 
 	void MakeModel()
 	{
-		print("sup123");
 		if(	player.getUsername() == "Turtlecake" ||
 			player.getUsername() == "MintMango" ||
 			player.getUsername() == "Mazey" ||
@@ -96,9 +95,7 @@ class Player
 			player.getUsername() == "Netormozi_snekersni" ||
 			player.getUsername() == "GoldenGuy")
 		{
-			print("hi skin");
 			player_material.SetTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
-			print("hi skin 3");
 			player_frozen_material.SetTexture("Textures/Skins/skin_"+player.getUsername()+".png", 0);
 		}
 		else
@@ -108,7 +105,6 @@ class Player
 		}
 
 
-		print("matrail");
 		player_material.DisableAllFlags();
 		player_material.SetFlag(SMaterial::COLOR_MASK, true);
 		player_material.SetFlag(SMaterial::ZBUFFER, true);
@@ -116,7 +112,7 @@ class Player
 		player_material.SetFlag(SMaterial::BACK_FACE_CULLING, true);
 		player_material.SetFlag(SMaterial::FOG_ENABLE, true);
 		player_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
-		print("material 2");
+
 		player_frozen_material.DisableAllFlags();
 		player_frozen_material.SetFlag(SMaterial::COLOR_MASK, true);
 		player_frozen_material.SetFlag(SMaterial::ZBUFFER, true);
@@ -126,21 +122,14 @@ class Player
 		player_frozen_material.MaterialType = SMaterial::TRANSPARENT_ALPHA_CHANNEL_REF;
 		player_frozen_material.SetFlag(SMaterial::LIGHTING, true);
 		player_frozen_material.EmissiveColor = 0xFFFF6060;
-		print("material ended");
 
 		{
 			SMeshBuffer@ buffer = SMeshBuffer();
-			print("setting");
 			buffer.SetMaterial(@player_material);
-			print("not setting");
 			buffer.SetVertices(player.getUsername() == "Turtlecake" ? player_head_jenny : player_head);
-			print("setting");
 			buffer.SetIndices(player_IDs);
-			print("setting");
 			buffer.SetHardwareMappingHint(Driver::STATIC, Driver::VERTEX_INDEX);
-			print("setting1");
 			buffer.RecalculateBoundingBox();
-			print("settinga");
 			mesh_head.AddMeshBuffer(buffer);
 		}
 
@@ -194,7 +183,6 @@ class Player
 			buffer.RecalculateBoundingBox();
 			mesh_leg_left.AddMeshBuffer(buffer);
 		}
-		print("bye 1234");
 	}
 
 	void MakeNickname()
@@ -798,12 +786,12 @@ class Player
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, 0, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_body.DrawWithMaterial();
+		mesh_body.Draw();
 
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y+1.5f, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, -dir_y, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_head.DrawWithMaterial();
+		mesh_head.Draw();
 
 		f32 vem_mult = Maths::Min(Maths::Pow(vel.length()*30.0f, 1.75f), 75);
 		f32 limb_rotation = Maths::Cos(getInterGameTime()/3.5f)*vem_mult;
@@ -813,15 +801,15 @@ class Player
 		mesh_arm_left.DrawWithMaterial();
 		Matrix::SetRotationDegrees(model_matr, -limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_arm_right.DrawWithMaterial();
+		mesh_arm_right.Draw();
 
 		Matrix::SetTranslation(model_matr, render_pos.x, render_pos.y+0.75f, render_pos.z);
 		Matrix::SetRotationDegrees(model_matr, limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_leg_left.DrawWithMaterial();
+		mesh_leg_left.Draw();
 		Matrix::SetRotationDegrees(model_matr, -limb_rotation, dir_x, 0);
 		Render::SetModelTransform(model_matr);
-		mesh_leg_right.DrawWithMaterial();
+		mesh_leg_right.Draw();
 	}
 
 	void RenderNickname()
@@ -833,7 +821,7 @@ class Player
 		Render::SetModelTransform(billboard_model);
 		Render::SetAlphaBlend(true);
 		Render::SetZBuffer(false, true);
-		mesh_nickname.Draw();
+		mesh_nickname.DrawWithMaterial();
 		Render::SetAlphaBlend(false);
 		Render::SetZBuffer(true, true);
 	}
