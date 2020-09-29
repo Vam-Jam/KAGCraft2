@@ -440,7 +440,7 @@ void Render(int id)
 	}
 	Render::SetBackfaceCull(false);
 	Vec3f look(1,1,0);
-	look = look.rotateXZ(-camera.interpolated_dir_x);
+	look.rotateXZ(-camera.interpolated_dir_x);
 	ps.Render(look);
 	Render::SetBackfaceCull(true);
 

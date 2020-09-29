@@ -18,7 +18,7 @@ class Plane
 	
 	bool Intersects(AABBox3d&in box)
 	{
-		Vec3f dim = box.getExtent();
+		Vec3f dim = box.getDim();
 		float d = DotProduct(box.getCenter(), normal);
 		float r = dim.x * Maths::Abs(normal.x) + dim.y * Maths::Abs(normal.y) + dim.z * Maths::Abs(normal.z);
 		float dpr = d + r;
